@@ -1,4 +1,36 @@
 $(function () {
+
+
+    // 监听登陆表单的提交事件
+    $('#form_login').on('submit', function (e) {
+        console.log(2151);
+
+        e.preventDefault()
+
+        //阻止默认提交行为
+        $.ajax({
+            url: '/api/login',
+            method: 'post',
+            // 快速获取表单中的数据
+            data: $(this).serialize(),
+            success: function (res) {
+                if (res.status !== 0) {
+                    return layer.msg('登录失败！')
+                }
+                layer.msg('登陆成功！')
+                // 将登录成功得到的 token 字符串，保存到localStorage 中
+                localStorage.setItem('token', res.token)
+                console.log(res.token);
+                //跳转到后台主页
+                // location.href = "/index.html"
+
+
+            }
+        })
+
+    })
+
+
     // 点击 "去注册账号"的链接
     $('#link_reg').on('click', function () {
         $('.login_box').hide()
@@ -44,9 +76,11 @@ $(function () {
 
                 return layer.msg(res.message);
             }
-            layer.msg('注册成功,请登录！');
+            layer.msg('注册成功,请登录！'); data
             // 模拟人的点击行为
             $('#link_login').click();
         })
     })
+
+
 })
