@@ -3,7 +3,7 @@ $(function () {
 
     // 监听登陆表单的提交事件
     $('#form_login').on('submit', function (e) {
-        console.log(2151);
+
 
         e.preventDefault()
 
